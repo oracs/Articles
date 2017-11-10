@@ -1,0 +1,18 @@
+.classpath
+.project
+.settings
+*.iml
+.idea/
+xtend-gen
+target/
+.DS_Store
+dependency-reduced-pom.xml
+logs/application.log
+*.pyc
+log/
+logs/
+/lib/configuration/
+plugins
+persistence/
+# ignore the work direcoty settings.xml
+/settings.xml
