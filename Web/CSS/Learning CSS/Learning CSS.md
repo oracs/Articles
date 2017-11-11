@@ -301,7 +301,6 @@ text-decoration 有 5 个值：
 - none
 - underline： 加下划线
 - overline：在文本的顶端画一个上划线
-- line-through：在文本中间画一个贯穿线
 - blink：让文本闪烁
 
 #### 空白符(font-family)
