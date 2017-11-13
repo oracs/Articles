@@ -818,16 +818,66 @@ left:20px
 #### CSS 浮动
 我们通过 float 属性实现元素的浮动。
 
+## CSS选择器
+### 元素选择器
+元素选择器又称为类型选择器（type selector）。
+类型选择器匹配文档树中该元素类型的每一个实例。
 
+```css
+html {color:black;}
+h1 {color:blue;}
+h2 {color:silver;}
+```
+### 选择器分组
+假设希望 h2 元素和段落都有灰色。可以写成：
+```css
+h2, p {color:gray;}
+```
+如果对同一类元素声明多个样式，可以写在一起，用分号分开。
 
+```css
+h1 {font: 28px Verdana; color: white; background: black;}
+```
 
+### 类选择器
+类选择器允许以一种独立于文档元素的方式来指定样式。
 
+```css
+.important {color:red;}
 
+<h1 class="important">
+This heading is very important.
+</h1>
 
+<p class="important">
+This paragraph is very important.
+</p>
+```
+如果想仅对元素p进行样式设置，可以写成：p.important {color:red;}
+又想对h1设置不同样式，可以写成：
 
+```css
+p.important {color:red;}
+h1.important {color:blue;}
+```
+#### 多类选择器
+一个 class 中可以包含多个样式，之间用空格分隔。例如，如果希望将一个特定的元素同时标记为重要（important）和警告（warning），就可以写作：
 
+```css
+.important {font-weight:bold;}
+.warning {font-style:italic;}
+.important.warning {background:silver;}
 
+<p class="important warning">
+This paragraph is a very important warning.
+</p>
+```
+class 为 important 的所有元素都是粗体，而 class 为 warning 的所有元素为斜体，class 中同时包含 important 和 warning 的所有元素还有一个银色的背景 。
 
+如果把把两个类选择器链接在一起，仅可以选择同时包含这些类名的元素（类名的顺序不限）。比如：
+```css
+.important.warning {background:silver;}
+```
 
 
 
