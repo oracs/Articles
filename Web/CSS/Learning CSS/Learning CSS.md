@@ -878,6 +878,22 @@ class 为 important 的所有元素都是粗体，而 class 为 warning 的所�
 ```css
 .important.warning {background:silver;}
 ```
+### ID 选择器
+ID 选择器允许以一种独立于文档元素的方式来指定样式。
+ID 选择器前面有一个 # 号，
+ID 选择器不引用 class 属性的值，它要引用 id 属性中的值。
+
+```css
+#intro {font-weight:bold;}
+``` css
+<p id="intro">This is a paragraph of introduction.</p>
+```
+#### ID选择器和类选择器的区别
+
+- 区别 1：只能在文档中使用一次
+- 区别 2：不能使用 ID 列表
+- 区别 3：ID 能包含更多含义
+比如，并不知道要添加的样式出现在哪个元素上。
 
 
 
