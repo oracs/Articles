@@ -77,6 +77,7 @@ new Thread(() -> {
 ### Lambda表达式的语法
 格式：(参数) -> 表达式
 其中：
+
 1. 参数可以为0-n个。如果有多个参数，以逗号(,)分割。如果有一个参数，括号()可以省去；如果没有参数，括号()也不能省去。[这就有点不够纯粹了，比scala还是差了点！]，参数前可以加类型名，但由于自动类型推导功能，可以省去。
 1. 表达式可以是一行表达式，也可以是多条语句。如果是多条语句，需要包裹在大括号{}中。
 1. 表达式不需要显示执行返回结果，它会从上下文中自动推导。
@@ -126,6 +127,7 @@ Java8的java.util.function包已经内置了大量的函数式接口，如下所
 | Predicate&lt;T&gt; | T | void | test | 对类型T进行函数处理，返回布尔值 |
 | BiPredicate&lt;T,U&gt; | T,U | void | test | 对类型T和U进行函数处理，返回布尔值 |
 从中可以看出：
+
 - 内置的函数式接口主要分四类：Supplier， Consumer， Function，Predicate。Operator是Function的一种特例。
 - 除了Supplier没有提供二元参数以为（这和java不支持多个返回值有关），其他三类都提供了二元入参。
 
@@ -186,6 +188,7 @@ public class FunctionalCase {
 ### 方法引用
 如果Lambda表达式已经有实现的方法了，则可以用方法引用进行简化。
 方法引用的语法如下：
+
 - 对象::实例方法
 - 类::静态方法
 - 类::实例方法
@@ -244,6 +247,7 @@ class ConcurrentGreeter extends Greeter {
 ### 构造器引用
 构造器引用和方法引用类似，只不过函数接口返回实例对象或者数组。
 构造器引用的语法如下：
+
 - 类::new
 - 数组::new
 
@@ -275,6 +279,7 @@ Button[] buttons = stream.toArray(Button[]::new);
   }
 ```
 一个lambda表达式一般由以下三部分组成：
+
 - 参数
 - 表达式
 - 自由变量
