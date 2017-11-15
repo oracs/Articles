@@ -218,7 +218,7 @@ public class ClassResolvor {
 ![ ](https://github.com/oracs/Articles/blob/master/Java/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BAJava%E8%99%9A%E6%8B%9F%E6%9C%BA_Dive%20into%20JVM/09.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BAJava%E8%99%9A%E6%8B%9F%E6%9C%BA--%E5%AD%97%E8%8A%82%E7%A0%81%E6%89%A7%E8%A1%8C/images/case1_1.jpg)
 
 2.执行偏移地址为1的指令
-![ ](http://wiki.zte.com.cn/download/attachments/107521682/case1_2.jpg)
+![ ](images/case1_2.jpg)
 
 3.执行偏移地址为11的指令
 ![ ](http://wiki.zte.com.cn/download/attachments/107521682/case1_3.jpg)
