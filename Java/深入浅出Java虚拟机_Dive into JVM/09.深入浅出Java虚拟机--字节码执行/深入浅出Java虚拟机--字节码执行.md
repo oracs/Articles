@@ -52,11 +52,11 @@ invokestatic,invokespecial两个指令所调用的方法都是在编译期即可
 静态分派多发生在方法的重载(overload)上，来看下下面这个例子：
 
 ```java
-public class StaticDispatch {  
-    static abstract class Human {  
+public class StaticDispatch {
+    static abstract class Human {
     }
 	
-    static class Man extends Human {  
+    static class Man extends Human {
     }
 	
     static class Woman extends Human {
@@ -215,25 +215,25 @@ public class ClassResolvor {
 
 字节码执行的过程如下：
 1.执行偏移地址为0的指令
-![ ](https://github.com/oracs/Articles/blob/master/Java/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BAJava%E8%99%9A%E6%8B%9F%E6%9C%BA_Dive%20into%20JVM/09.%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BAJava%E8%99%9A%E6%8B%9F%E6%9C%BA--%E5%AD%97%E8%8A%82%E7%A0%81%E6%89%A7%E8%A1%8C/images/case1_1.jpg)
+![ ](images/case1_1.jpg)
 
 2.执行偏移地址为1的指令
 ![ ](images/case1_2.jpg)
 
 3.执行偏移地址为11的指令
-![ ](http://wiki.zte.com.cn/download/attachments/107521682/case1_3.jpg)
+![ ](images/case1_3.jpg)
 
 4.执行偏移地址为12的指令
-![ ](http://wiki.zte.com.cn/download/attachments/107521682/case1_4.jpg)
+![ ](images/case1_4.jpg)
 
 5.执行偏移地址为13的指令
-![ ](http://wiki.zte.com.cn/download/attachments/107521682/case1_5.jpg)
+![ ](images/case1_5.jpg)
 
 6.执行偏移地址为14的指令
-![ ](http://wiki.zte.com.cn/download/attachments/107521682/case1_6.jpg)
+![ ](images/case1_6.jpg)
 
 7.执行偏移地址为16的指令
-![ ](http://wiki.zte.com.cn/download/attachments/107521682/case1_7.jpg)
+![ ](images/case1_7.jpg)
 
 ## 案例2
 有一个java类：SimpleClass.class，代码如下：
@@ -256,12 +256,12 @@ public class SimpleClass {
 
 构造器函数包含两个指令。首先，this 变量被压栈到操作数栈，然后父类的构造器函数被调用，而这个构造器会消费 this，之后 this 被弹出操作数栈。
 
-![ ](http://wiki.zte.com.cn/download/attachments/107521682/case2_1.jpg)
+![ ](images/case2_1.jpg)
 
 `sayHello()`方法更加复杂，正如之前解释的那样，因为它需要用运行时常量池中的指向符号引用的真实引用。第一个操作码 getstatic 从System类中将out静态变量压到操作数栈。下一个操作码 ldc 把字符串 “Hello” 压栈到操作数栈。最后 invokevirtual 操作符会调用 System.out 变量的 println 方法，从操作数栈作弹出”Hello” 变量作为 println 的一个参数，并在当前线程开辟一个新栈帧。
 
-![ ](http://wiki.zte.com.cn/download/attachments/107521682/case2_2.jpg)
-![ ](http://wiki.zte.com.cn/download/attachments/107521682/case2_3.jpg)
-![ ](http://wiki.zte.com.cn/download/attachments/107521682/case2_4.jpg)
+![ ](images/case2_2.jpg)
+![ ](images/case2_3.jpg)
+![ ](images/case2_4.jpg)
 
 
