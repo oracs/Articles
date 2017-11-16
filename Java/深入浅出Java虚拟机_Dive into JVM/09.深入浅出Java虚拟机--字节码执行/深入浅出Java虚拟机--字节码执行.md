@@ -185,7 +185,7 @@ public static void main(java.lang.String[]);
 public class ClassResolvor {
   public int calc() {
     int a = 100;
-    int b = 200;
+    int b = 200;o
     int c = 300;
     return (a + b) * c;
   }
@@ -215,25 +215,25 @@ public class ClassResolvor {
 
 字节码执行的过程如下：
 
-#### 执行偏移地址为0的指令
+#### 1.执行偏移地址为0的指令
 ![ ](images/case1_1.jpg)
 
-#### 执行偏移地址为1的指令
+#### 2.执行偏移地址为1的指令
 ![ ](images/case1_2.jpg)
 
-#### 执行偏移地址为11的指令
+#### 3.执行偏移地址为11的指令
 ![ ](images/case1_3.jpg)
 
-#### 执行偏移地址为12的指令
+#### 4.执行偏移地址为12的指令
 ![ ](images/case1_4.jpg)
 
-#### 执行偏移地址为13的指令
+#### 5.执行偏移地址为13的指令
 ![ ](images/case1_5.jpg)
 
-#### 执行偏移地址为14的指令
+#### 6.执行偏移地址为14的指令
 ![ ](images/case1_6.jpg)
 
-#### 执行偏移地址为16的指令
+#### 7.执行偏移地址为16的指令
 ![ ](images/case1_7.jpg)
 
 ## 案例2
