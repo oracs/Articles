@@ -927,8 +927,28 @@ a[href="http://www.w3school.com.cn/about_us.asp"] {color: red;}
 ```
 
 ### 后代选择器
+我们可以定义后代选择器来创建一些规则，使这些规则在某些文档结构中起作用，而在另外一些结构中不起作用。
 
+比如，如果希望只对 h1 元素中的 em 元素应用样式，可以这样写：
 
+```css
+h1 em {color:red;}
+```
+中间用空格分隔。
+h1 em 这个语法就会选择从 ul 元素继承的所有 em 元素，而不论 em 的嵌套层次多深。
+
+后代选择器还可以实现一些高级功能。
+
+假设有一个文档，其中有一个边栏，还有一个主区。边栏的背景为蓝色，主区的背景为白色，这两个区都包含链接列表。不能把所有链接都设置为蓝色，因为这样一来边栏中的蓝色链接都无法看到。
+
+可以写成：
+
+```css
+div.sidebar {background:blue;}
+div.maincontent {background:white;}
+div.sidebar a:link {color:white;}
+div.maincontent a:link {color:blue;}
+```
 
 
 
