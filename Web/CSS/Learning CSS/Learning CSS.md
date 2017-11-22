@@ -949,6 +949,102 @@ div.maincontent {background:white;}
 div.sidebar a:link {color:white;}
 div.maincontent a:link {color:blue;}
 ```
+### 子元素选择器
+子元素选择器（Child selectors）只能选择作为某元素子元素的元素。
+
+如果希望选择只作为 h1 元素子元素的 strong 元素，可以这样写：
+```css
+h1 > strong {color:red;}
+```
+这个规则会把第一个 h1 下面的两个 strong 元素变为红色，但是第二个 h1 中的 strong 不受影响：
+
+```css
+<h1>This is <strong>very</strong> <strong>very</strong> important.</h1>
+<h1>This is <em>really <strong>very</strong></em> important.</h1>
+```
+
+子选择器使用了大于号（子结合符）。
+子结合符两边可以有空白符，这是可选的。
+
+### 相邻兄弟选择器
+相邻兄弟选择器（Adjacent sibling selector）可选择紧接在另一元素后的元素，且二者有相同父元素。
+
+例如，如果要增加紧接在 h1 元素后出现的段落的上边距，可以这样写：
+
+```css
+h1 + p {margin-top:50px;}
+```
+表示：选择紧接在 h1 元素后出现的段落，h1 和 p 元素拥有共同的父元素
+注意：用一个结合符只能选择两个相邻兄弟中的第二个元素。第一个元素不受影响。
+
+### 伪类
+CSS 伪类用于向某些选择器添加特殊的效果。
+
+伪类的语法：
+```css
+selector : pseudo-class {property: value}
+```
+
+CSS 类也可与伪类搭配使用。
+selector.class : pseudo-class {property: value}
+
+#### 锚伪类
+在支持 CSS 的浏览器中，链接的不同状态都可以不同的方式显示，这些状态包括：活动状态，已被访问状态，未被访问状态，和鼠标悬停状态。
+```css
+a:link {color: #FF0000}		/* 未访问的链接 */
+a:visited {color: #00FF00}	/* 已访问的链接 */
+a:hover {color: #FF00FF}	/* 鼠标移动到链接上 */
+a:active {color: #0000FF}	/* 选定的链接 */
+```
+
+伪类可以与 CSS 类配合使用：
+```css
+a.red : visited {color: #FF0000}
+
+<a class="red" href="css_syntax.asp">CSS Syntax</a>
+```
+
+假如上面的例子中的链接被访问过，那么它将显示为红色。
+
+### 伪元素
+CSS 伪元素用于向某些选择器设置特殊效果。
+
+语法：
+```css
+selector:pseudo-element {property:value;}
+```
+
+CSS 类也可以与伪元素配合使用：
+```css
+selector.class:pseudo-element {property:value;}
+```
+"first-line" 伪元素用于向文本的首行设置特殊样式。
+
+在下面的例子中，浏览器会根据 "first-line" 伪元素中的样式对 p 元素的第一行文本进行格式化：
+
+```css
+p:first-line
+  {
+  color:#ff0000;
+  font-variant:small-caps;
+  }
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
