@@ -1046,13 +1046,13 @@ p:first-line
 #### 使用 position 属性进行左和右对齐
 对齐元素的方法之一是使用绝对定位。
 ```css
-.right
-{
-position:absolute;
-right:0px;
-width:300px;
-background-color:#b0e0e6;
-}
+ .right
+ {
+     position:absolute;
+     right:0px;
+     width:300px;
+     background-color:#b0e0e6;
+ }
 ```
 
 #### 使用 float 属性来进行左和右对齐
@@ -1065,15 +1065,56 @@ background-color:#b0e0e6;
      width:300px;
      background-color:#b0e0e6;
  }
-
 ```
 
+### CSS 尺寸
+CSS 尺寸 (Dimension) 属性允许你控制元素的高度和宽度。
 
+#### 使用像素值设置图像的高度
+```css
+img.normal
+{
+    height: auto
+}
+
+img.big
+{
+    height: 160px
+}
+
+img.small
+{
+    height: 30px
+}
 ```
 
+#### 使用百分比设置图像的高度
+```css
+ img.normal
+ {
+     height: auto
+ }
+ img.big
+ {
+     height: 50%
+ }
+ img.small
+ {
+     height: 10%
+ }
+```
 
+#### CSS 尺寸属性
 
-
+| 属性 | 描述 |
+|--------|--------|
+|   height     |   设置元素的高度。     |
+|  line-height      |   设置行高。     |
+|  max-height      |   设置元素的最大高度。     |
+|  max-width      |   设置元素的最大宽度。     |
+|  min-height      |  设置元素的最小高度。      |
+|  min-width      |    设置元素的最小宽度。    |
+|  width      |   设置元素的宽度。     |
 
 
 
