@@ -1030,7 +1030,46 @@ p:first-line
   }
 ```
 
+### CSS水平对齐
+#### 使用 margin 属性来水平对齐
+可通过将左和右外边距设置为 "auto"，来对齐块元素。
 
+
+···css
+.center
+{
+    margin:auto;
+    width:70%;
+    background-color:#b0e0e6;
+}
+
+#### 使用 position 属性进行左和右对齐
+对齐元素的方法之一是使用绝对定位。
+```css
+.right
+{
+position:absolute;
+right:0px;
+width:300px;
+background-color:#b0e0e6;
+}
+```
+
+#### 使用 float 属性来进行左和右对齐
+对齐元素的另一种方法是使用 float 属性：
+
+```css
+ .right
+ {
+     float:right;
+     width:300px;
+     background-color:#b0e0e6;
+ }
+
+```
+
+
+```
 
 
 
