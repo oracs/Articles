@@ -1117,7 +1117,25 @@ img.small
 |  width      |   设置元素的宽度。     |
 
 
+### CSS分类
+CSS 分类属性用来在何处显示元素，相对于其正常位置来定位元素，使用绝对值来定位元素，以及元素的可见度。
 
+| 属性 | 描述 |
+|--------|--------|
+|   clear     |  设置一个元素的侧面是否允许其他的浮动元素。    |
+|   cursor     |  规定当指向某元素之上时显示的指针类型。    |
+|   display     |  设置是否及如何显示元素。    |
+|   float     |   定义元素在哪个方向浮动。   |
+|   position     |  把元素放置到一个静态的、相对的、绝对的、或固定的位置中。    |
+|   visibility     |  设置元素是否可见或不可见。    |
+
+```css
+    <style type="text/css">
+        p {display: inline}
+        div {display: none}
+    </style>
+```
+display: inline 表示所有元素在一行显示。
 
 
 
