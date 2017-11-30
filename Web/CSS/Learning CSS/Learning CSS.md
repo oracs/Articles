@@ -24,7 +24,7 @@ selector {property: value}
 ```
 
 下面这行代码的作用是将 h1 元素内的文字颜色定义为红色，同时将字体大小设置为 14 像素。
-![ ](http://wiki.zte.com.cn/download/attachments/123674749/css%E8%AF%AD%E6%B3%95%E6%A0%B7%E4%BE%8B.jpg)
+![ ](images/css语法样例.jpg)
 
 #### 注意
 1.如果值为若干单词，则要给值加引号，比如
@@ -596,11 +596,11 @@ th
 
 width 和 height 指的是内容区域的宽度和高度。
 
-![ ](http://wiki.zte.com.cn/download/attachments/123674749/css桩模型概述.jpg)
+![ ](images/css桩模型概述.jpg)
 
 增加内边距、边框和外边距不会影响内容区域的尺寸，但是会增加元素框的总尺寸。
 
-![ ](http://wiki.zte.com.cn/download/attachments/123674749/桩模式例子.jpg)
+![ ](images/桩模式例子.jpg)
 
 #### 内边距(padding)
 padding 属性定义元素的内边距。padding 属性接受长度值或百分比值，但不允许使用负值。
@@ -1243,8 +1243,24 @@ border-image:url(border.png) 30 30 round;
 -o-border-image:url(border.png) 30 30 round; /* Opera */
 }
 ```
+### CSS3 背景
+#### background-size 属性
+background-size 属性规定背景图片的尺寸。这就允许我们在不同的环境中重复使用背景图片。
 
+```css
+  body
+  {
+      background:url(../i/bg_flower.gif);
+      background-size:63px 100px;
+      background-repeat:no-repeat;
+      padding-top:80px;
+  }
+```
+可以指定背景图片的尺寸。
 
+#### background-origin 属性
+background-origin 属性规定背景图片的定位区域。
+背景图片可以放置于 content-box、padding-box 或 border-box 区域。
 
 
 
