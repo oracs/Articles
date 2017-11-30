@@ -1261,9 +1261,17 @@ background-size 属性规定背景图片的尺寸。这就允许我们在不同�
 #### background-origin 属性
 background-origin 属性规定背景图片的定位区域。
 背景图片可以放置于 content-box、padding-box 或 border-box 区域。
+![ ](images/box.jpg)
 
-
-
+```css
+div
+{
+  background:url(bg_flower.gif);
+  background-repeat:no-repeat;
+  background-size:100% 100%;
+  background-origin:content-box;
+}
+```
 
 
 
