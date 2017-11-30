@@ -1137,14 +1137,112 @@ CSS 分类属性用来在何处显示元素，相对于其正常位置来定位�
 ```
 display: inline 表示所有元素在一行显示。
 
+### CSS导航栏
+导航栏基本上是一个链接列表，通常使用 `<ul>` 和 `<li>` 元素。
+
+```css
+    <ul>
+        <li><a href="default.asp">Home</a></li>
+        <li><a href="news.asp">News</a></li>
+        <li><a href="contact.asp">Contact</a></li>
+        <li><a href="about.asp">About</a></li>
+    </ul>
+```
+
+我们可以进一步，从列表中去掉圆点和外边距：
+```css
+    <style>
+        ul 
+        {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+```
+垂直导航栏
+```css
+a
+{
+display:block;
+width:60px;
+}
+```
 
 
+水平导航栏
+```css
+li
+{
+float:left;
+}
+a
+{
+display:block;
+width:60px;
+}
+```
 
+或者
+```css
+  li
+  {
+   display:inline;
+  }
+```
 
+## CSS3
+CSS3是CSS最新的样式规范，完全向后兼容，被划分为模块。
+其中最重要的 CSS3 模块包括：
 
+- 选择器
+- 框模型
+- 背景和边框
+- 文本效果
+- 2D/3D 转换
+- 动画
+- 多列布局
+- 用户界面
 
+### CSS3 边框
+#### 圆角边框
+使用 border-radius 属性用于创建圆角边框。
 
+```css
+  div
+  {
+      text-align:center;
+      border:2px solid #a1a1a1;
+      padding:10px 40px;
+      background:#dddddd;
+      width:350px;
+      border-radius:25px;
+  }
+```
+#### 边框阴影
+使用 box-shadow 用于向方框添加阴影。
+```css
+  div
+  {
+      width:300px;
+      height:100px;
+      background-color:#ff9900;
+      box-shadow: 10px 10px 5px #888888;
+  }
+```
 
+#### 边框图片
+可以使用 border-image 属性，创建以图片显示的边框：
+
+```css
+div
+{
+border-image:url(border.png) 30 30 round;
+-moz-border-image:url(border.png) 30 30 round; /* 老的 Firefox */
+-webkit-border-image:url(border.png) 30 30 round; /* Safari 和 Chrome */
+-o-border-image:url(border.png) 30 30 round; /* Opera */
+}
+```
 
 
 
