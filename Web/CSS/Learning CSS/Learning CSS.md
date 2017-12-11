@@ -1272,11 +1272,52 @@ div
   background-origin:content-box;
 }
 ```
+### CSS3 文本效果
+#### 文本阴影
+可以使用 text-shadow 属性，向文本添加阴影，包括：水平阴影、垂直阴影、模糊距离，以及阴影的颜色。
+```css
+ h1
+ {
+    text-shadow: 5px 5px 5px #FF0000;
+ }
+```
 
+#### 自动换行
+使用 word-wrap 属性，可以使文本强制换行。
+```css
+p {word-wrap:break-word;}
+```
 
+### CSS3 字体
+在 CSS3 之前，必须使用已在用户计算机上安装好的字体。
+在 CSS3 中，通过使用 @font-face 规则，我们可以使用任意字体。可以先将该字体文件存放到 web 服务器上，它会在需要时被自动下载到用户的计算机上。
 
+```css
+<style> 
+@font-face
+{
+  font-family: myFirstFont;
+  src: url('Sansation_Light.ttf'),
+       url('Sansation_Light.eot'); /* IE9+ */
+}
 
+div
+{
+  font-family:myFirstFont;
+}
+</style>
+```
 
+#### 使用粗体字体
+```css
+@font-face
+{
+  font-family: myFirstFont;
+  src: url('Sansation_Bold.ttf'),
+       url('Sansation_Bold.eot'); /* IE9+ */
+  font-weight:bold;
+}
+```
 
 
 
