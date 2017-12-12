@@ -1,4 +1,4 @@
-技术文章系列:
+技术文章系列
 
 - 编程语言：Java/Python/JavaScript
 - 软件设计和架构
