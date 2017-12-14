@@ -4,7 +4,8 @@
 
 | 时间 | 内容 |
 |--------|--------|
-| 2016.9.22 | 初稿 |
+| 2016.09.22 | 初稿 |
+| 2017.12.14 | 修改文档错误 |
 
 [TOC]
 
@@ -124,8 +125,8 @@ Java8的java.util.function包已经内置了大量的函数式接口，如下所
 | BiFunction&lt;T,U,R&gt; | T,U | R | apply | 把参数类型为T和U的数据经过函数处理转换成类型为R的数据 |
 | UnaryOperator&lt;T&gt; | T | T | apply | 对类型T进行了一元操作，仍返回类型T |
 | BinaryOperator&lt;T&gt; | T,T | T | apply | 对类型T进行了二元操作，仍返回类型T |
-| Predicate&lt;T&gt; | T | void | test | 对类型T进行函数处理，返回布尔值 |
-| BiPredicate&lt;T,U&gt; | T,U | void | test | 对类型T和U进行函数处理，返回布尔值 |
+| Predicate&lt;T&gt; | T | booelan | test | 对类型T进行函数处理，返回布尔值 |
+| BiPredicate&lt;T,U&gt; | T,U | boolean | test | 对类型T和U进行函数处理，返回布尔值 |
 从中可以看出：
 
 - 内置的函数式接口主要分四类：Supplier， Consumer， Function，Predicate。Operator是Function的一种特例。
