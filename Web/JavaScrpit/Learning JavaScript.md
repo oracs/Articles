@@ -133,12 +133,125 @@ return a*b;
 document.getElementById("demo").innerHTML=myFunction(4,3);
 ```
 
-## 运算符
+## if语句
+在 JavaScript 中，我们可使用以下条件语句：
+•if 语句 - 只有当指定条件为 true 时，使用该语句来执行代码
+•if...else 语句 - 当条件为 true 时执行代码，当条件为 false 时执行其他代码
+•if...else if....else 语句 - 使用该语句来选择多个代码块之一来执行
+•switch 语句 - 使用该语句来选择多个代码块之一来执行
 
+```javascript
+if (time<10)
+  {
+  x="Good morning";
+  }
+else if (time<20)
+  {
+  x="Good day";
+  }
+else
+  {
+  x="Good evening";
+  }
 
+```
 
+## Switch 语句
+```javascript
+var day=new Date().getDay();
+switch (day)
+{
+case 6:
+  x="Today it's Saturday";
+  break;
+case 0:
+  x="Today it's Sunday";
+  break;
+default:
+  x="Looking forward to the Weekend";
+}
+```
 
+$$ for语句
+JavaScript 支持不同类型的循环：
+•for - 循环代码块一定的次数
+•for/in - 循环遍历对象的属性
+•while - 当指定的条件为 true 时循环指定的代码块
+•do/while - 同样当指定的条件为 true 时循环指定的代码块
+•break 语句用于跳出循环。
+•continue 用于跳过循环中的一个迭代。
 
+```javascript
+for (var i=0,len=cars.length; i<len; i++)
+{
+document.write(cars[i] + "<br>");
+}
+```
 
+### For/In 循环
+```javascript
+var person={fname:"John",lname:"Doe",age:25};
+
+for (x in person)
+  {
+  txt=txt + person[x];
+  }
+```
+
+## while语句
+### while 循环
+```javascript
+while (i<5)
+  {
+  x=x + "The number is " + i + "<br>";
+  i++;
+  }
+```
+
+### do/while 循环
+```javascript
+do
+  {
+  x=x + "The number is " + i + "<br>";
+  i++;
+  }
+while (i<5);
+```
+## 异常
+
+- try 语句测试代码块的错误。
+- catch 语句处理错误。
+- throw 语句创建自定义错误。
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+var txt="";
+function message()
+{
+try
+  {
+  adddlert("Welcome guest!");
+  }
+catch(err)
+  {
+  txt="There was an error on this page.\n\n";
+  txt+="Error description: " + err.message + "\n\n";
+  txt+="Click OK to continue.\n\n";
+  alert(txt);
+  }
+}
+</script>
+</head>
+
+<body>
+<input type="button" value="View message" onclick="message()">
+</body>
+
+</html>
+
+```
 
 
