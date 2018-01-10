@@ -136,13 +136,37 @@ public class AuthorSetting {
 ```
 这样就完成了属性的自动注入。
 
+### 日志配置
+Spring Boot支持log4j, logback, java-logging多种日志框架。
+默认使用logback作为日志框架。
+日志选项可以在application.properties中配置
+```
+logging.file=e:/tmp/log/log.log
+logging.level.org.springframework.web: DEBUG
+```
 
+### Profile配置
+profile可以针对不同环境进行不同的配置。
+全局配置使用：application-{profile}.properties，比如application-production.properties。
+然后在application.properties中设置 **spring.profiles.active = production**来指定激活的profile。
 
+例子：
+1.在resources目录下新增两个profile文件
+application-dev.properties
+```
+server.port=9090
+```
 
+另一个profile文件：
+application-test.properties
+```
+server.port=9091
+```
 
-
-
-
+在application.properties中，指定激活的profile:
+```
+spring.profiles.active = test
+```
 
 
 
