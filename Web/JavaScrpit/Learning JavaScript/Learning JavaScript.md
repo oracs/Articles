@@ -1,4 +1,4 @@
-
+nte
 ## JavaScript的使用
 JavaScript脚本必须位于 `<script>` 与 `</script>` 标签之间，可被放置在 HTML 页面的 `<body>` 和 `<head>` 部分中。
 
@@ -362,8 +362,67 @@ var child=document.getElementById("p1");
 parent.removeChild(child);
 </script>
 ```
+## 对象
+### 创建 JavaScript 对象
+创建新对象有两种不同的方法：
+1.定义并创建对象的实例
+2.使用函数来定义对象，然后创建新的对象实例
 
+#### 创建直接的实例
+```javascript
+person=new Object();
+person.firstname="Bill";
+person.lastname="Gates";
+person.age=56;
+person.eyecolor="blue";
+```
+也可以简化成：
+```javascript
+person={firstname:"John",lastname:"Doe",age:50,eyecolor:"blue"};
+```
 
+访问对象中的元素：
+```javascript
+var person={fname:"Bill",lname:"Gates",age:56};
 
+for (x in person)
+  {
+  txt=txt + person[x];
+  }
+```
 
+#### 使用对象构造器
+```javascript
+function person(firstname,lastname,age,eyecolor)
+{
+this.firstname=firstname;
+this.lastname=lastname;
+this.age=age;
+this.eyecolor=eyecolor;
+}
+```
+
+调用方式：
+```javascript
+var myFather=new person("Bill","Gates",56,"blue");
+var myMother=new person("Steve","Jobs",48,"green");
+
+```
+##### 把方法添加到 JavaScript 对象
+```javascript
+function person(firstname,lastname,age,eyecolor)
+{
+this.firstname=firstname;
+this.lastname=lastname;
+this.age=age;
+this.eyecolor=eyecolor;
+
+this.changeName=changeName;
+function changeName(name)
+{
+this.lastname=name;
+}
+}
+
+```
 
