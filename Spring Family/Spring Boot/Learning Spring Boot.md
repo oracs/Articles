@@ -4,6 +4,9 @@
 ### 版本
 Spring Boot版本：V1.5.9
 
+### 通过IntelliJ 创建spring boot工程
+1.新建Project，选择Spring Initializer。
+
 ### Maven配置
 主要的pom.xml配置项
 ```xml
@@ -55,7 +58,7 @@ exclude = {DataSourceAutoConfiguration.class}
 
 配置文件举例：
 
-```
+```java
 server.port=9090
 server.context_path=/helloboot
 ```
@@ -77,7 +80,7 @@ spring boot为我们提供了大多数场景的starter pom
 ### 属性注入
 在application.properties文件中定义属性，在程序中使用@Value注解访问。
 比如，application.properties文件中定义了如下属性：
-```
+```java
 book.author=dy
 book.name=spring boot
 ```
@@ -95,7 +98,7 @@ book.name=spring boot
 除了使用@Value方式注入属性外，Spring boot还提供了更通用的方式。可以使用@ConfigurationProperties将properties属性和Bean属性进行关联。 
 
 1.在application.properties文件中进行属性定义：
-```
+```java
 author.name=dy
 author.age=20
 ```
@@ -140,7 +143,7 @@ public class AuthorSetting {
 Spring Boot支持log4j, logback, java-logging多种日志框架。
 默认使用logback作为日志框架。
 日志选项可以在application.properties中配置
-```
+```java
 logging.file=e:/tmp/log/log.log
 logging.level.org.springframework.web: DEBUG
 ```
@@ -153,25 +156,86 @@ profile可以针对不同环境进行不同的配置。
 例子：
 1.在resources目录下新增两个profile文件
 application-dev.properties
-```
+```java
 server.port=9090
 ```
 
 另一个profile文件：
 application-test.properties
-```
+```java
 server.port=9091
 ```
 
 在application.properties中，指定激活的profile:
-```
+```java
 spring.profiles.active = test
 ```
 
+### 自动配置
+只要在pom中配置了starter的组件，spring boot会自动加载。
+如果想查看spring boot的开启和关闭的spring boot组件，可以在application.properties中设置：
+```java
+deubg = true
+```
+自动配置主要是配置了注解：@EnableAutoConfiguration
+它使用了@Import(EnableAutoConfigurationImportSelector.class)
+其中的SpringFactoriesLoader.loadFactoryNames()会去“META-INF/spring.factories"下加载尅有自动配置的组件。
 
+#### 核心注解
 
+@ConditionalOnBean: 当容器里有指定的Bean的条件下。
+@ConditionalOnClass：当类路径下有指定的类的条件下。
+@ConditionalOnExpression: 基于SpEL表达式作为判断条件。
+@ConditionalOnJava: 基于JVM版本作为判断条件。
+@ConditionalOnJndi: 在JNDI存在的情况下
+@ConditionalOnMissingBean: 当容器里没有指定Bean的情况下。
+@ConditionalOnMissingClass: 当类路径下没有指定的类的情况下。
+@ConditionalOnWebApplication: 当前项目是Web应用的情况下。
+@ConditionalOnProperty: 指定的属性是否有指定的值。
+@ConditionalOnSingleCandidate: 当指定的Bean在容器中只有一个。
 
+#### 自己写一个starter
+1.在pom的关键配置项
 
+```xml
+	<groupId>com.dy</groupId>
+	<artifactId>spring-boot-starter-hello</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-autoconfigure</artifactId>
+		</dependency>
+	</dependencies>
+```
+
+2.x
+
+3.x
+
+4.自动配置类
+```java
+@Configuration
+@EnableConfigurationProperties(HelloServiceProperties.class)
+@ConditionalOnClass(HelloService.class)
+@ConditionalOnProperty(prefix = "hello", value = "enabled", matchIfMissing = true)
+public class HelloServiceAutoConfiguration {
+    @Autowired
+    private HelloServiceProperties helloServiceProperties;
+
+    @Bean
+    @ConditionalOnMissingBean(HelloService.class)
+    public HelloService helloService() {
+        HelloService helloService = helloService();
+        helloService.setMsg(helloServiceProperties.getMsg());
+        return helloService;
+    }
+}
+```
+
+@ConditionalOnClass()：
+@ConditionalOnMissingBean(HelloService.class)
 
 
 
