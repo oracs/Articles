@@ -179,7 +179,7 @@ deubg = true
 ```
 自动配置主要是配置了注解：@EnableAutoConfiguration
 它使用了@Import(EnableAutoConfigurationImportSelector.class)
-其中的SpringFactoriesLoader.loadFactoryNames()会去“META-INF/spring.factories"下加载尅有自动配置的组件。
+其中的SpringFactoriesLoader.loadFactoryNames()会去“META-INF/spring.factories"下加载所有自动配置的组件。
 
 #### 核心注解
 
@@ -210,9 +210,40 @@ deubg = true
 	</dependencies>
 ```
 
-2.x
+2.类型安全的属性配置类
+```java
+@ConfigurationProperties(prefix = "hello")
+public class HelloServiceProperties {
+    private String msg = "default";
 
-3.x
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+}
+```
+
+3.业务Bean
+```java
+public class HelloService {
+    private String msg;
+
+    public String sayHello() {
+        return "hello, " + msg;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+}
+```
 
 4.自动配置类
 ```java
@@ -234,14 +265,33 @@ public class HelloServiceAutoConfiguration {
 }
 ```
 
-@ConditionalOnClass()：
-@ConditionalOnMissingBean(HelloService.class)
+5.注册配置
+在src\resources目录下新建目录和文件：META-INF\spring.factories，内容如下：
+```java
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.dy.spring_boot_starter_hello.HelloServiceAutoConfiguration
+```
+
+6.使用starter
+在使用的工程中，pom做如下设置：
+```java
+		<dependency>
+			<groupId>com.dy</groupId>
+			<artifactId>spring-boot-starter-hello</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+```
+
+application.properties文件增加配置项：
+```java
+hello.msg=dy111
+```
 
 
+Application类中调用如下：
+```java
 
-
-
-
+```
 
 
 
