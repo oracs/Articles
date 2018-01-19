@@ -566,7 +566,287 @@ $(document).ready(function()
 </html>
 ```
 
+## JQuery HTML相关
+### 获得HTML内容和属性
+•text() - 设置或返回所选元素的文本内容
+•html() - 设置或返回所选元素的内容（包括 HTML 标记）
+•val() - 设置或返回表单字段的值
+•attr() - 用于获取属性值。
 
+```javascript
+<html>
+<head>
+<script type="text/javascript" src="jquery.js"></script>
+<script>
+$(document).ready(function(){
+  $("#btn1").click(function(){
+    alert("Text: " + $("#test").text());
+  });
+  $("#btn2").click(function(){
+    alert("HTML: " + $("#test").html());
+  });
+  $("btn3").click(function(){
+    alert("Value: " + $("#name").val());
+  });
+});
+</script>
+</head>
+
+<body>
+<p id="test">这是段落中的<b>粗体</b>文本。</p>
+<p>姓名：<input type="text" id="name" value="米老鼠"></p>
+<button id="btn1">显示文本</button>
+<button id="btn2">显示 HTML</button>
+<button id="btn3">显示值</button>
+</body>
+
+</html>
+```
+
+### 设置HTML内容和属性
+•text() - 设置或返回所选元素的文本内容
+•html() - 设置或返回所选元素的内容（包括 HTML 标记）
+•val() - 设置或返回表单字段的值
+
+```javascript
+<html>
+<head>
+<script type="text/javascript" src="jquery.js"></script>
+
+<script>
+$(document).ready(function(){
+  $("#btn1").click(function(){
+    $("#test1").text("Hello world!");
+  });
+  $("#btn2").click(function(){
+    $("#test2").html("<b>Hello world!</b>");
+  });
+  $("#btn3").click(function(){
+    $("#test3").val("Dolly Duck");
+  });
+});
+</script>
+</head>
+
+<body>
+<p id="test1">这是段落。</p>
+<p id="test2">这是另一个段落。</p>
+<p>Input field: <input type="text" id="test3" value="Mickey Mouse"></p>
+<button id="btn1">设置文本</button>
+<button id="btn2">设置 HTML</button>
+<button id="btn3">设置值</button>
+</body>
+
+</html>
+```
+
+另外，这text(),html(),val()3个函数还支持回调函数。
+
+```javascript
+<html>
+<head>
+<script type="text/javascript" src="jquery.js"></script>
+
+<script>
+$(document).ready(function(){
+  $("#btn1").click(function(){
+    $("#test1").text(function(i,origText){
+      return "Old text: " + origText + " New text: Hello world! (index: " + i + ")";
+    });
+  });
+
+  $("#btn2").click(function(){
+    $("#test2").html(function(i,origText){
+      return "Old html: " + origText + " New html: Hello <b>world!</b> (index: " + i + ")";
+    });
+  });
+
+});
+</script>
+</head>
+
+<body>
+<p id="test1">这是<b>粗体</b>文本。</p>
+<p id="test2">这是另一段<b>粗体</b>文本。</p>
+<button id="btn1">显示旧/新文本</button>
+<button id="btn2">显示旧/新 HTML</button>
+</body>
+
+</html>
+```
+
+### 添加元素
+•append() - 在被选元素的结尾插入内容
+•prepend() - 在被选元素的开头插入内容
+•after() - 在被选元素之后插入内容
+•before() - 在被选元素之前插入内容
+
+```javascript
+<html>
+<head>
+<script type="text/javascript" src="jquery.js"></script>
+
+<script>
+$(document).ready(function(){
+  $("#btn1").click(function(){
+    $("p").append(" <b>Appended text</b>.");
+  });
+
+  $("#btn2").click(function(){
+    $("ol").prepend("<li>Prepended item</li>");
+  });
+
+  $("#btn3").click(function(){
+    $("#li2").before("<b>before text</b>");
+  });
+
+  $("#btn4").click(function(){
+    $("#li2").after("<b>after text</b>");
+  });
+});
+</script>
+</head>
+
+<body>
+<p>This is a paragraph.</p>
+<p>This is another paragraph.</p>
+<ol>
+<li>List item 1</li>
+<li id="li2">List item 2</li>
+<li>List item 3</li>
+</ol>
+<button id="btn1">追加文本</button>
+<button id="btn2">追加列表项</button>
+<button id="btn3">before insert文本</button>
+<button id="btn4">after insert列表项</button>
+</body>
+
+</html>
+```
+
+### 删除元素
+•remove() - 删除被选元素（及其子元素）
+•empty() - 从被选元素中删除子元素
+
+```javascript
+
+<html>
+<head>
+<script type="text/javascript" src="jquery.js"></script>
+
+<script>
+$(document).ready(function(){
+  $("button").click(function(){
+    $("#div1").remove();
+  });
+});
+</script>
+</head>
+
+<body>
+
+<div id="div1" style="height:100px;width:300px;border:1px solid black;background-color:yellow;">
+This is some text in the div.
+<p>This is a paragraph in the div.</p>
+<p>This is another paragraph in the div.</p>
+</div>
+
+<br>
+<button>删除 div 元素</button>
+
+</body>
+</html>
+```
+
+### 获取并设置 CSS 类
+•addClass() - 向被选元素添加一个或多个类
+•removeClass() - 从被选元素删除一个或多个类
+•toggleClass() - 对被选元素进行添加/删除类的切换操作
+•css() - 设置或返回样式属性
+
+```javascript
+<html>
+<head>
+<script type="text/javascript" src="jquery.js"></script>
+
+<script>
+$(document).ready(function(){
+  $("button").click(function(){
+    $("h1,h2,p").addClass("blue");
+    $("div").addClass("important");
+  });
+});
+</script>
+<style type="text/css">
+.important
+{
+font-weight:bold;
+font-size:xx-large;
+}
+.blue
+{
+color:blue;
+}
+</style>
+</head>
+<body>
+
+<h1>标题 1</h1>
+<h2>标题 2</h2>
+<p>这是一个段落。</p>
+<p>这是另一个段落。</p>
+<div>这是非常重要的文本！</div>
+<br>
+<button>向元素添加类</button>
+
+</body>
+
+</html>
+```
+
+### CSS方法
+css() 方法设置或返回被选元素的一个或多个样式属性。
+
+- 返回CSS属性：css("propertyname");
+- 设置CSS属性：css("propertyname","value");
+- 设置多个CSS属性：css({"propertyname":"value","propertyname":"value",...});
+
+```javascript
+<html>
+<head>
+<script type="text/javascript" src="jquery.js"></script>
+
+<script>
+$(document).ready(function(){
+  $("button").click(function(){
+    $("p").css("background-color","yellow");
+  });
+});
+</script>
+</head>
+
+<body>
+<h2>这是标题</h2>
+<p style="background-color:#ff0000">这是一个段落。</p>
+<p style="background-color:#00ff00">这是一个段落。</p>
+<p style="background-color:#0000ff">这是一个段落。</p>
+<p>这是一个段落。</p>
+<button>设置 p 元素的背景色</button>
+</body>
+
+</html>
+```
+
+### 尺寸
+
+- width() 方法设置或返回元素的宽度（不包括内边距、边框或外边距）。
+- height() 方法设置或返回元素的高度（不包括内边距、边框或外边距）。
+- innerWidth() 方法返回元素的宽度（包括内边距）。
+- innerHeight() 方法返回元素的高度（包括内边距）。
+- outerWidth() 方法返回元素的宽度（包括内边距和边框）。
+- outerHeight() 方法返回元素的高度（包括内边距和边框）。
+- outerWidth(true) 方法返回元素的宽度（包括内边距、边框和外边距）。
+- outerHeight(true) 方法返回元素的高度（包括内边距、边框和外边距）。
 
 
 
