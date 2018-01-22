@@ -52,6 +52,26 @@ mvn spring-boot:run
 ```java
 exclude = {DataSourceAutoConfiguration.class}
 ```
+
+一个典型的例子：
+```java
+@RestController
+@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
+public class SbtestApplication{
+
+    @RequestMapping("/")  , 开始路径
+    String index() {	
+	}
+	
+	// 启动入口
+	public static void main(String[] args) {
+		SpringApplication.run(SbtestApplication.class, args);
+	}
+
+}
+```
+
+
 ### 配置文件
 全局配置文件：application.propertie或者application.yml。
 存放位置：src/main/resources
@@ -292,7 +312,16 @@ Application类中调用如下：
 ```java
 
 ```
+## Web开发
 
+- 脚本、图片等静态资源：src/main/resources/static目录下。比如jquery，bootstrap等。
+- 页面：src/main/resources/templates目录下。
+
+spring boot默认提供了对spring mvc的集成。但如果不想使用spring mvc，则可以通过配置类实现自己的配置。
+配置类的注解为：@Configuration和@EnableWebMvc
+如果想使用Spring Boot的配置，由想自定义，可以继承WebMvcConfiguerAdapter类。
+
+### 对应用服务器的支持
 
 
 
