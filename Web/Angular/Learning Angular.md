@@ -63,6 +63,11 @@ actionApp.config(['$routeProvider' , function($routeProvider) {
     </div>
 </div>
 ```
+说明：
+
+- input text的ng-model定义为personName。
+- button的ng-click事件调用search()方法。
+- {{person.xxx}}是调用数据模型后返回的结果。
 
 ### 4.controller.js
 ```javascript
@@ -88,3 +93,25 @@ actionApp.controller('View2Controller', ['$rootScope', '$scope',  function($root
     });
 }]);
 ```
+说明：
+
+- $scope.search定义了search()方法，$scope.personName是view上的input text的数据模型名称。
+- $http.get()是调用后端search请求，带了一个参数personName。返回结果是person对象。
+
+
+## Spring Boot的数据访问
+Spring Data是Spring数据访问的系列工程，它支持对数据的统一访问标准。
+主要支持的数据源包括：
+**Spring Data JPA，**
+```java
+Maven坐标：
+groupId: org.springframework.data
+artifactId: spring-data-jpa
+```
+
+其余常见的数据源包括：MongoDB, Neo4j, Redis, ElasticSearch, Cassandra等。
+
+
+
+
+

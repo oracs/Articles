@@ -322,8 +322,24 @@ spring boot默认提供了对spring mvc的集成。但如果不想使用spring m
 如果想使用Spring Boot的配置，由想自定义，可以继承WebMvcConfiguerAdapter类。
 
 ### 对应用服务器的支持
+在application.properties文件中，
+通用的容器配置型都以server作为前缀，如果是tomcat特有配置，则以server.tomcat作为前缀。
 
+示例：
+```java
+server.port = # 配置程序端口号，默认8080
+server.session-timeout  # 用户会话过期时间，以秒为单位
+server.context-path= # 配置访问路径，默认为/
 
+#配置tomcat
+server.tomcat.uri-encoding=   # 编码方式，默认utf-8
+server.tomcat.compression=  #是否开启压缩
+```
+#### 替换tomcat
+spring boot默认使用tomcat作为引用服务器容器。 
+如果想换成jetty服务器，则执行：
+
+### 使用Angular和Bootstrap进行Web开发
 
 
 
