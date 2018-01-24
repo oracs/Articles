@@ -7,6 +7,7 @@
 |--------|--------|--------|
 | 2016.6.27 | 丁一 | 初稿 |
 | 2017.2.22 | 丁一 | 完善Dockerfile命令 |
+| 2018.1.23 | 丁一 | 增加批量删除容器和镜像的命令 |
 
 [TOC]
 
@@ -122,6 +123,10 @@ root@Ubuntu1604--001:~# docker rmi -f 74
 Deleted: sha256:7494a14a7bef2fb547378e6e3237c1f78234b3fb43b70a8ab80394b9f3175af3
 Deleted: sha256:9b8df836317579e14c6421fa2cc25e21b877866e072cccac62abcfe640b9a905
 ```
+删除全部镜像：
+```java
+docker rmi $(docker images -q)
+```
 
 - ### 镜像操作历史(history)
 -no-trunc=false Don't truncate output; 
@@ -234,6 +239,7 @@ root@Ubuntu1604--001:~# docker ps -a
 -v, --volumes=false Remove the volumes associated to the container
 **删除所有容器**
 **$docker rm `docker ps -a -q`**
+或者：docker rm ${docker ps -a -q}
 
 - ### 显示容器日志(logs)
 **$docker logs Name/ID**

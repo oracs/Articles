@@ -111,6 +111,8 @@ artifactId: spring-data-jpa
 
 其余常见的数据源包括：MongoDB, Neo4j, Redis, ElasticSearch, Cassandra等。
 
+CrudRepository接口定义了常用的操作：save(),find(),delete()等。
+
 
 
 
