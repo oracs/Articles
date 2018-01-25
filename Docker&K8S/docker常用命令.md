@@ -152,12 +152,17 @@ hello.txt  ubuntu.tar  zte-centos
 
 - ### 加载镜像(load)
 **$docker load -i file_path**
-加载一个tar包格式的镜像; 
+加载一个tar包格式的镜像到系统中; 
 -i, --input="" Read from a tar archive file
-```
+
+```java
 // 使用scp将save.tar拷到机器b上，然后
 $docker load < /home/save.tar
+
+或者：
+$docker load -i alpine-glibc.tar
 ```
+然后使用 docker images命令就可以新导入的镜像。
 
 - ### 上传镜像(push)
 **$docker push new_image_name**

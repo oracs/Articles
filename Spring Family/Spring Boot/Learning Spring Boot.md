@@ -39,10 +39,35 @@ Spring Boot版本：V1.5.9
     </build>
 ```
 
-通过maven命令执行spring boot工程 ：
+#### 通过maven命令执行spring boot工程
 ```bash
 mvn spring-boot:run
 ```
+#### 将应用程序打包运行
+maven的pom.xml文件增加如下内容：
+```java
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+```
+在target目录下会生成xxx.jar文件。
+执行和启动：
+```java
+java -jar xxx.jar
+```
+
 
 ## Spring Boot核心
 ### 入口类
