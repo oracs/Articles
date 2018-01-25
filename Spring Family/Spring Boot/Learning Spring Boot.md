@@ -68,6 +68,22 @@ maven的pom.xml文件增加如下内容：
 java -jar xxx.jar
 ```
 
+#### 在容器内运行
+1.编写Dockerfile
+```java
+FROM openjdk:8.0.72
+WORKDIR /sbtest
+ADD . /sbtest
+EXPOSE 9090
+CMD java -jar sbtest-0.0.1-SNAPSHOT.jar
+```
+
+2.构建镜像
+```java
+$docker build -t sbtest:0.1 .
+```
+3.执行镜像
+$ docker run -d -p 9090:9090 sbtest:0.1
 
 ## Spring Boot核心
 ### 入口类

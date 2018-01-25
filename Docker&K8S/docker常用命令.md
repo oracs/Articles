@@ -177,6 +177,8 @@ $docker load -i alpine-glibc.tar
 --restart=on-failure：n, 退出代码非0才会重启,最多重启n次
 -p 主机端口号:容器暴漏端口号， 端口映射
 -e：设置proxy环境变量
+-t:让Docker分配一个伪终端（pseudo-tty）并绑定到容器的标准输入上
+-i: 让容器的标准输入保持打开
 -v 宿主机目录：容器目录， 将宿主机目录作为卷，加载到容器里。
 --net host：使用主机网络, host就写成host，不要改成自己的主机ip
 --volumes from src_containner containner, 指定容器的卷加入到新容器中
@@ -184,18 +186,26 @@ $docker load -i alpine-glibc.tar
 --net=networkname, 将容器启动在某个创建好的网络[networkname]中
 --rm，容器停止运行后自动删除。
 ```
+// 以指定端口映射并在后台运行(容器内的9090端口映射到外部的9090端口)
+$docker run -d -p 9090:9090 sbtest
+
 // 交互式进行容器
 root@Ubuntu1604--001:/# docker run -it zte-centos /bin/bash
 [root@f6cb183a55c3 /]# 
+
 // 在容器中运行"echo"命令，输出"hello word"
 root@Ubuntu1604--001:/# docker run ubuntu echo "hello,world"
 hello,world
+
 // 在容器中安装新的程序
 $docker run image_name apt-get install -y app_name
+
 // 加载宿主机的目录到容器中
 $docker run -d -p 80 --name webset -v $PWD/website:/var/www/html/website nginx
+
 // 容器以本机主机ip启动，并设置代理
 $docker run -i -t --net host -e http_proxy=“http://proxyxa.zte.com.cn:80/” -e https_proxy=“http://proxyxa.zte.com.cn:80/” centos:7.0.1406 /bin/bash
+
 // 将redis容器启动在自定义网络app上.
 docker run -d --net=app --name db redis:3.2.1
 ```
@@ -245,6 +255,9 @@ root@Ubuntu1604--001:~# docker ps -a
 **删除所有容器**
 **$docker rm `docker ps -a -q`**
 或者：docker rm ${docker ps -a -q}
+
+删除所有状态为exited的容器
+$docker rm $(docker ps -aq -f status=exited)
 
 - ### 显示容器日志(logs)
 **$docker logs Name/ID**
@@ -331,7 +344,7 @@ hello.txt  zte-centos
 
 ## 五.制作镜像
 - ### 根据DockerFile生成镜像(build)
-**docker build -t="repo_name/image_name:tag" .**
+**docker build -t repo_name/image_name:tag .**
 其中最后的.表示当前目录中的镜像， 也可以指定为git仓库地址。
 -f name, 指定dockerfile的目录和文件名
 --no-cache, 忽略缓存
