@@ -848,7 +848,415 @@ $(document).ready(function(){
 - outerWidth(true) 方法返回元素的宽度（包括内边距、边框和外边距）。
 - outerHeight(true) 方法返回元素的高度（包括内边距、边框和外边距）。
 
+## JQuery遍历
+### 向上遍历 DOM 树
+•parent()：返回被选元素的直接父元素。
+•parents():返回被选元素的所有祖先元素，它一路向上直到文档的根元素 (`<html>`)。
+•parentsUntil():返回介于两个给定元素之间的所有祖先元素。
 
+#### parent()
+返回被选元素的直接父元素。
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.ancestors *
+{
+display: block;
+border: 2px solid lightgrey;
+color: lightgrey;
+padding: 5px;
+margin: 15px;
+}
+</style>
+<script src="jquery.js">
+</script>
+<script>
+$(document).ready(function(){
+  $("span").parent().css({"color":"red","border":"2px solid red"});
+});
+</script>
+</head>
+<body>
+
+<div class="ancestors">
+  <div style="width:500px;">div (曾祖父)
+    <ul>ul (祖父)
+      <li>li (直接父)
+        <span>span</span>
+      </li>
+    </ul>
+  </div>
+
+  <div style="width:500px;">div (祖父)
+    <p>p (直接父)
+        <span>span</span>
+      </p>
+  </div>
+</div>
+
+</body>
+</html>
+```
+
+#### parents() 方法
+返回被选元素的所有祖先元素，它一路向上直到文档的根元素 (`<html>`)。
+```javascript
+$(document).ready(function(){
+  $("span").parents();
+});
+```
+
+#### parentsUntil()
+返回介于两个给定元素之间的所有祖先元素。
+```javascript
+$(document).ready(function(){
+  $("span").parentsUntil("div");
+});
+```
+
+### 向下遍历 DOM 树
+用于向下遍历 DOM 树的 jQuery 方法：
+•children()：返回被选元素的所有直接子元素。
+•find(): 返回被选元素的后代元素，一路向下直到最后一个后代。
+
+#### children() 方法
+返回被选元素的所有直接子元素。
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.descendants *
+{
+display: block;
+border: 2px solid lightgrey;
+color: lightgrey;
+padding: 5px;
+margin: 15px;
+}
+</style>
+<script src="jquery.js">
+</script>
+<script>
+$(document).ready(function(){
+  $("div").children().css({"color":"red","border":"2px solid red"});
+});
+</script>
+</head>
+<body>
+
+<div class="descendants" style="width:500px;">div (当前元素)
+  <p>p (子)
+    <span>span (孙)</span>
+  </p>
+  <p>p (child)
+    <span>span (孙)</span>
+  </p>
+</div>
+
+</body>
+</html>
+
+```
+####  find() 方法
+返回被选元素的后代元素，一路向下直到最后一个后代。返回所有满足条件的元素。
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.descendants *
+{
+display: block;
+border: 2px solid lightgrey;
+color: lightgrey;
+padding: 5px;
+margin: 15px;
+}
+</style>
+<script src="jquery.js">
+</script>
+<script>
+$(document).ready(function(){
+  $("div").find("span").css({"color":"red","border":"2px solid red"});
+});
+</script>
+</head>
+<body>
+
+<div class="descendants" style="width:500px;">div (current element)
+  <p>p (子)
+    <span>span (孙)</span>
+  </p>
+  <p>p (child)
+    <span>span (孙)</span>
+  </p>
+</div>
+
+</body>
+</html>
+```
+
+### 遍历同胞元素
+常用的 DOM 树水平遍历方法：
+•siblings()： 
+•next()
+•nextAll()
+•nextUntil()
+•prev()
+•prevAll()
+•prevUntil()
+
+#### siblings()
+返回被选元素的所有同胞元素。
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.siblings *
+{
+display: block;
+border: 2px solid lightgrey;
+color: lightgrey;
+padding: 5px;
+margin: 15px;
+}
+</style>
+<script src="jquery.js">
+</script>
+<script>
+$(document).ready(function(){
+  $("h2").siblings().css({"color":"red","border":"2px solid red"});
+});
+</script>
+</head>
+<body class="siblings">
+
+<div>div (父)
+  <p>p</p>
+  <span>span</span>
+  <h2>h2</h2>
+  <h3>h3</h3>
+  <p>p</p>
+</div>
+
+</body>
+</html>
+```
+
+#### next() 方法
+返回被选元素的下一个同胞元素。
+该方法只返回一个元素。
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.siblings *
+{
+display: block;
+border: 2px solid lightgrey;
+color: lightgrey;
+padding: 5px;
+margin: 15px;
+}
+</style>
+<script src="jquery.js">
+</script>
+<script>
+$(document).ready(function(){
+  $("h2").next().css({"color":"red","border":"2px solid red"});
+});
+</script>
+</head>
+<body class="siblings">
+
+<div>div (父)
+  <p>p</p>
+  <span>span</span>
+  <h2>h2</h2>
+  <h3>h3</h3>
+  <p>p</p>
+</div>
+
+</body>
+</html>
+```
+h3会标红
+
+#### nextAll() 方法
+返回被选元素的所有跟随的同胞元素。
+下面的例子返回` <h2>` 的所有跟随的同胞元素：
+```javascript
+$(document).ready(function(){
+  $("h2").nextAll();
+});
+```
+
+#### nextUntil() 方法
+法返回介于两个给定参数之间的所有跟随的同胞元素。
+
+下面的例子返回介于 `<h2>` 与` <h6>` 元素之间的所有同胞元素：h3,h4,h5
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.siblings *
+{
+display: block;
+border: 2px solid lightgrey;
+color: lightgrey;
+padding: 5px;
+margin: 15px;
+}
+</style>
+<script src="jquery.js">
+</script>
+<script>
+$(document).ready(function(){
+  $("h2").nextUntil("h6").css({"color":"red","border":"2px solid red"});
+});
+</script>
+</head>
+<body class="siblings">
+
+<div>div (父)
+  <p>p</p>
+  <span>span</span>
+  <h2>h2</h2>
+  <h3>h3</h3>
+  <h4>h4</h4>
+  <h5>h5</h5>
+  <h6>h6</h6>
+  <p>p</p>
+</div>
+
+</body>
+</html>
+
+```
+
+### 过滤
+三个最基本的过滤方法是：
+
+- first() 
+- last()
+- eq()
+
+#### first() 方法
+返回被选元素的首个元素。
+下面的例子返回第一个div,p元素。
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<script src="jquery.js">
+</script>
+<script>
+$(document).ready(function(){
+  $("div p").first().css("background-color","yellow");
+});
+</script>
+</head>
+<body>
+
+<h1>欢迎来到我的主页</h1>
+<div>
+<p>这是 div 中的一个段落。</p>
+</div>
+
+<div>
+<p>这是 div 中的另一个段落。</p>
+</div>
+
+<p>这也是段落。</p>
+
+</body>
+</html>
+```
+
+#### last() 方法
+返回被选元素的最后一个元素。
+
+```javascript
+$(document).ready(function(){
+  $("div p").last();
+});
+```
+####  eq() 方法
+返回被选元素中带有指定索引号的元素。
+索引号从 0 开始，下面的例子选取第二个 `<p>` 元素（索引号 1）：
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<script src="jquery.js">
+</script>
+<script>
+$(document).ready(function(){
+  $("p").eq(1).css("background-color","yellow");
+});
+</script>
+</head>
+<body>
+
+<h1>欢迎来到我的主页</h1>
+<p>我是唐老鸭 (index 0)。</p>
+<p>唐老鸭 (index 1)。</p>
+<p>我住在 Duckburg (index 2)。</p>
+<p>我最好的朋友是米老鼠 (index 3)。</p>
+
+</body>
+</html>
+```
+#### filter() 方法
+filter() 方法允许规定一个标准。不匹配这个标准的元素会被从集合中删除，匹配的元素会被返回。
+
+下面的例子返回带有类名 "intro" 的所有` <p>` 元素：
+
+```javascript
+<!DOCTYPE html>
+<html>
+<head>
+<script src="jquery.js">
+</script>
+<script>
+$(document).ready(function(){
+  $("p").filter(".intro").css("background-color","yellow");
+});
+</script>
+</head>
+<body>
+
+<h1>欢迎来到我的主页</h1>
+<p>我是唐老鸭。</p>
+<p class="intro">我住在 Duckburg。</p>
+<p class="intro">我爱 Duckburg。</p>
+<p>我最好的朋友是 Mickey。</p>
+
+</body>
+</html>
+
+```
+#### not() 方法
+not() 方法返回不匹配标准的所有元素。
+not() 方法与 filter() 相反。
+
+```javascript
+$(document).ready(function(){
+  $("p").not(".intro");
+});
+```
 
 
 
