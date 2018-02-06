@@ -1,5 +1,11 @@
 # Learning Spring Boot
 
+修订记录
+
+| 时间 | 作者 | 内容 |
+|--------|--------|--------|
+| 2018.2.5 | 丁一 | 初稿 |
+
 ## 环境
 ### 版本
 Spring Boot版本：V1.5.9
@@ -255,7 +261,145 @@ deubg = true
 @ConditionalOnProperty: 指定的属性是否有指定的值。
 @ConditionalOnSingleCandidate: 当指定的Bean在容器中只有一个。
 
-#### 自己写一个starter
+
+## 常用的starter介绍
+### Web Starter
+首先，让我们来看看 REST 服务开发。我们可以使用像 Spring MVC、Tomcat 和 Jackson 这样的库，这对于单个应用程序来说是还是存在许多依赖。
+
+Spring Boot starter 通过添加一个依赖来帮助减少手动添加依赖的数量。 因此，不要手动指定依赖，您只需要添加一个 starter 即可，如下所示：
+
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-web</artifactId>
+</dependency>
+```
+现在我们可以创建一个 REST 控制器。为了简单起见，我们不会使用数据库，只专注于 REST 控制器：
+```java
+@RestController
+public class GenericEntityController {
+    private List<GenericEntity> entityList = new ArrayList<>();
+ 
+    @RequestMapping("/entity/all")
+    public List<GenericEntity> findAll() {
+        return entityList;
+    }
+ 
+    @RequestMapping(value = "/entity", method = RequestMethod.POST)
+    public GenericEntity addEntity(GenericEntity entity) {
+        entityList.add(entity);
+        return entity;
+    }
+ 
+    @RequestMapping("/entity/findby/{id}")
+    public GenericEntity findById(@PathVariable Long id) {
+        return entityList.stream().
+                 filter(entity -> entity.getId().equals(id)).
+                   findFirst().get();
+    }
+}
+```
+GenericEntity 是一个简单的 bean，id 的类型为 Long，value 为 String 类型。
+
+就是这样，应用程序可以开始运行了，您可以访问 **http://localhost:8080/springbootapp/entity/all** 并检查控制器是否正常工作。
+
+我们已经创建了一个配置非常少的 REST 应用程序。
+
+### Test Starter
+对于测试，我们通常使用以下组合：Spring Test、JUnit、Hamcrest 和 Mockito。我们可以手动包含所有这些库，但使用以下 Spring Boot starter 方式可以自动包含这些库：
+
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-test</artifactId>
+    <scope>test</scope>
+</dependency>
+```
+请注意，您不需要指定工件的版本号。Spring Boot 会自动选择合适的版本 — 您仅需要指定 spring-boot-starter-parent-artifact 的版本。 如果之后您想要升级 Boot 库和依赖，只需在一个地方升级 Boot 版本即可，它将会处理其余部分。
+
+让我们来测试一下之前创建的控制器。
+
+测试控制器有两种方法：
+•使用 mock 环境
+•使用嵌入式 Servlet 容器（如 Tomcat 或 Jetty）
+
+在本例中，我们将使用一个 mock 环境：
+```java
+@RunWith(SpringJUnit4ClassRunner.class)
+@SpringApplicationConfiguration(classes = Application.class)
+@WebAppConfiguration
+public class SpringBootApplicationTest {
+    @Autowired
+    private WebApplicationContext webApplicationContext;
+    private MockMvc mockMvc;
+ 
+    @Before
+    public void setupMockMvc() {
+        mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+    }
+ 
+    @Test
+    public void givenRequestHasBeenMade_whenMeetsAllOfGivenConditions_thenCorrect() throws Exception { 
+        MediaType contentType = new MediaType(MediaType.APPLICATION_JSON.getType(),
+        MediaType.APPLICATION_JSON.getSubtype(), Charset.forName("utf8"));
+        mockMvc.perform(MockMvcRequestBuilders.get("/entity/all")).
+        andExpect(MockMvcResultMatchers.status().isOk()).
+        andExpect(MockMvcResultMatchers.content().contentType(contentType)).
+        andExpect(jsonPath("$", hasSize(4))); 
+    } 
+}
+```
+
+这里重要的是 **@WebAppConfiguration** 注解和 MockMVC 是 spring-test 模块的一部分，hasSize 是一个 Hamcrest matcher，**@Before** 是一个 JUnit 注解。这些都可以通过导入这一个这样的 starter 依赖来引入。
+
+### Data JPA Starter
+大多数 Web 应用程序都存在某些持久化 — 常见的是 JPA。
+
+让我们使用 starter 来开始，而不是手动定义所有关联的依赖：
+
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-data-jpa</artifactId>
+</dependency>
+<dependency>
+    <groupId>com.h2database</groupId>
+    <artifactId>h2</artifactId>
+    <scope>runtime</scope>
+</dependency>
+```
+
+请注意，我们对这些数据库已经有了开箱即用的自动支持：H2、Derby 和 Hsqldb。在我们的示例中，我们将使用 H2。
+
+现在让我们为实体创建仓储（repository）：
+```java
+public interface GenericEntityRepository extends JpaRepository<GenericEntity, Long> {}
+```
+现在是测试代码的时候了。这是 JUnit 测试：
+
+```java
+@RunWith(SpringJUnit4ClassRunner.class)
+@SpringApplicationConfiguration(classes = Application.class)
+public class SpringBootJPATest {
+     
+    @Autowired
+    private GenericEntityRepository genericEntityRepository;
+ 
+    @Test
+    public void givenGenericEntityRepository_whenSaveAndRetreiveEntity_thenOK() {
+        GenericEntity genericEntity = 
+          genericEntityRepository.save(new GenericEntity("test"));
+        GenericEntity foundedEntity = 
+          genericEntityRepository.findOne(genericEntity.getId());
+         
+        assertNotNull(foundedEntity);
+        assertEquals(genericEntity.getValue(), foundedEntity.getValue());
+    }
+}
+```
+我们没有花时间指定数据库厂商、URL 连接和凭据。没有额外所需的配置，这些都受益于 Boot 的默认支持。 但是，如果您需要，可以进行详细配置。
+
+### 自己写一个starter
 1.在pom的关键配置项
 
 ```xml
@@ -353,6 +497,7 @@ Application类中调用如下：
 ```java
 
 ```
+
 ## Web开发
 
 - 脚本、图片等静态资源：src/main/resources/static目录下。比如jquery，bootstrap等。
