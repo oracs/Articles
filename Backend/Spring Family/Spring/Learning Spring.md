@@ -30,7 +30,25 @@
 #### 配置类
 - @Configuration注解声明类为配置类
 - @ComponentScan注解申明扫描的Bean路径。
-- @Bean，一个Java配置类中可以有0个或多个@Bean注解。
+- @Bean，一个Java配置类中可以有0个或多个@Bean注解。适用于之前遗留系统没有使用spring bean的场景，无侵入。
+- @Profile, 针对不同环境下的配置
+
+```java
+@Configuration
+public class ProfileConfig {
+	@Bean
+	@Profile("dev") //1
+	public DemoBean devDemoBean() {
+		return new DemoBean("from development profile");
+	}
+
+	@Bean
+	@Profile("prod") //2
+	public DemoBean prodDemoBean() {
+		return new DemoBean("from production profile");
+	}
+}
+```
 
 ### 使用方法
 
@@ -102,14 +120,75 @@ public class DiConfig {
 - Session: 给每个http session都新建一个Bean实例。
 - GlobalSession: 给每个global http session都新建一个Bean实例。
 
+```java
+@Service
+@Scope("prototype")
+public class DemoPrototypeService {
+}
+```
+
+### Bean的初始化和销毁
+对于在Bean初始化之后或者销毁前需要做的事情，可以用下面两种方式支持：
+
+- Java配置方式：@Bean的initMethod和destroyMethod
+- 注解方式：@PostConstruct和@PreDestroy
+
+```java
+// 配置类
+@Configuration
+@ComponentScan("com.dy.springdemo.init")
+public class PrePostConfig {
+    @Bean(initMethod = "init",destroyMethod = "destroy")
+    BeanWayService beanWayService(){
+        return new BeanWayService();
+    }
+}
+
+// 使用
+        AnnotationConfigApplicationContext context =
+                new AnnotationConfigApplicationContext(PrePostConfig.class);
+        BeanWayService beanWayService = context.getBean(BeanWayService.class);
+        context.close();
+```
+
+### profile
+Profile可以在不同的环境进行不同的配置设置。
+通过下面3种方式支持：
+
+- 在配置类的@Profile注解实现。
+- 设定jvm的spring.profiles.active参数
+- 在Servlet的context parameter中。
+
+```java
+// 配置类
+@Configuration
+public class ProfileConfig {
+    @Bean
+    @Profile("dev") //1
+    public DemoBean devDemoBean() {
+        return new DemoBean("from development profile");
+    }
+
+    @Bean
+    @Profile("prod") //2
+    public DemoBean prodDemoBean() {
+        return new DemoBean("from production profile");
+    }
+}
 
 
+// 使用
+        AnnotationConfigApplicationContext context =
+                new AnnotationConfigApplicationContext();
 
+        context.getEnvironment().setActiveProfiles("dev"); //1
+        context.register(ProfileConfig.class);//2
+        context.refresh(); //3
 
+        DemoBean demoBean = context.getBean(DemoBean.class);
 
-
-
-
+        System.out.println(demoBean.getContent());
+```
 
 
 
