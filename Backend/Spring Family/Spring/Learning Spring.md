@@ -5,7 +5,7 @@
 |--------|--------|--------|
 | 2018.2.5 | 丁一 | 初稿 |
 
-## 依赖注入
+## 1.依赖注入
 注入方式：
 
 - xml文件
@@ -91,6 +91,44 @@ public class DiConfig {
 - 通过context创建Bean。
 - 调用Bean的方法。
 - 关闭context
+
+## 2.spring常用配置
+### Bean的scope配置
+@Scope注解支持以下类型：
+
+- Singleton: 一个Spring容器只有一个实例，默认配置。
+- Prototype: 每次调用都新建一个Bean实例。
+- Request: 每一次http request都新建一个Bean实例。
+- Session: 给每个http session都新建一个Bean实例。
+- GlobalSession: 给每个global http session都新建一个Bean实例。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
