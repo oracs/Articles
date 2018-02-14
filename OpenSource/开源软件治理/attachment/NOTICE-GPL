@@ -1,0 +1,11 @@
+<project-name>
+Copyright <year> ZTE Corporation.
+
+This <project-name> product are released under the GNU General Public License (Version2) that can be found under http://www.gnu.org/licenses/gpl.html
+
+WRITTEN OFFER
+This product contains software whose rights holders license it on the terms of open source software licenses. We will provide you and any third party with the source code of the software licensed under an open source software license if you want to obtain a copy of the open source code contained in this product shipped on CD-ROM for a charge no more than the cost of performing such distribution, please contact us with the email tech.sp@zte.com.cn, detailing the name of the product and the firmware version for which you need the source code and indicating how we can contact you.
+
+<以下是依赖包说明>
+This distribution has a binary dependency on <dependecy-package-name>, which is available under the <xxx>
+License. The source code of <dependecy-package-name> can be found at <source_location>.

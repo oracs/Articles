@@ -1,5 +1,4 @@
 #Kubernetes常用命令
-**elite团队整理出品**
 
 修订记录
 

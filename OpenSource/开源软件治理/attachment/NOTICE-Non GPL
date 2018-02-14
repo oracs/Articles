@@ -1,0 +1,8 @@
+<project-name>
+Copyright <year> ZTE Corporation.
+
+This product includes software developed at ZTE Corporation.
+
+<以下是依赖包说明>
+This distribution has a binary dependency on <dependecy-package-name>, which is available under the <xxx>
+License. The source code of <dependecy-package-name> can be found at <source_location>.

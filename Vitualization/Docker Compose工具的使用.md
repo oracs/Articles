@@ -1,5 +1,4 @@
 ## Docker Compose工具的使用
-**elite团队出品**
 
 **修订记录**
 
