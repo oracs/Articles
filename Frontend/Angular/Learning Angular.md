@@ -1,3 +1,8 @@
+
+
+## 环境搭建
+https://wiki.zte.com.cn/pages/viewpage.action?pageId=33832016
+
 ## 入门
 ### 1.主界面：action.html
 ```html

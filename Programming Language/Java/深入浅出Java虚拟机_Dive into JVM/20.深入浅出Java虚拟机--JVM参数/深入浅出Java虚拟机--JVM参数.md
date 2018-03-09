@@ -58,3 +58,30 @@
 | -Xloggc:/path/gc.log | 日志文件的输出路径 |  |  | |
 | -XX:+PrintGCApplicationStoppedTime | 打印由GC产生的停顿时间 |  |  | |
 | -XX:+DisableExplicitGC | 关闭System.gc() |  |  |  |
+
+## JIT
+| 参数 | 描述 | 适用版本 | 默认值 | 备注 |
+|--------|--------|-------- |-------- |--------  |
+| -XX: CompileThreshold | JIT：方法调用计数器阀值 | |  |  |
+| -XX: -UseCounterDecay | JIT：是否使用方法调用计数半衰周期 | |  |  |
+| -XX: CounterHalfLifeTime | JIT：设置方法调用计数半衰周期 | |  |  |
+| -XX: BackEdgeThreshhold | JIT：回边计数器阀值 | |  | 虚拟机默认未实现 |
+| -XX: BackgroundCompilation | JIT：禁止后台编译| |  |  |
+| -XX: PrintCompilation | JIT：打印编译成本地代码的方法 | |  |  |
+| -XX: PrintInlining | JIT：打印方法内联信息 | |  |  |
+| -XX: PrintAssembly | JIT：打印编译后的汇编代码 | |  |  |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
